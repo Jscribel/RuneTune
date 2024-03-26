@@ -11,7 +11,7 @@ private enum class Theme(val bgRed : Int, val bgGreen: Int, val bgBlue: Int, val
     LIGHT(0xe8,0xe8,0xe8,0x00,0x00,0x00,0xd8,0xd8,0xd8)
 }
 
-class SettingsViewModel : ViewModel(){
+class GeneralViewModel : ViewModel(){
     private fun toTheme(nameTheme : String) : Theme{
         if(nameTheme.equals("dark")){
             return Theme.DARK

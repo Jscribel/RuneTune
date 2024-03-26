@@ -8,8 +8,8 @@ import moe.tlaster.precompose.viewmodel.viewModel
 import viewModels.GeneralViewModel
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import ui.bottomBarUI
-import ui.navHostUI
+import views.bottomBarView
+import views.navHostView
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
@@ -25,14 +25,14 @@ fun App() {
                 backgroundColor = generalViewModel.backgroundColor,
                 contentColor = generalViewModel.foregroundColor,
                 content = {
-                    navHostUI(navigator, generalViewModel)
+                    navHostView(navigator, generalViewModel)
                 },
                 bottomBar = {
                     BottomAppBar(
                         backgroundColor = generalViewModel.highlightColor,
                         contentColor = generalViewModel.foregroundColor
                     ) {
-                        bottomBarUI(navigator)
+                        bottomBarView(navigator)
                     }
                 }
             )

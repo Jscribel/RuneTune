@@ -1,4 +1,4 @@
-package ui
+package views
 
 import androidx.compose.runtime.Composable
 import moe.tlaster.precompose.navigation.NavHost
@@ -7,16 +7,16 @@ import moe.tlaster.precompose.navigation.transition.NavTransition
 import viewModels.GeneralViewModel
 
 @Composable
-fun navHostUI(navigator : Navigator, generalViewModel :GeneralViewModel){
+fun navHostView(navigator : Navigator, generalViewModel :GeneralViewModel){
     NavHost(navigator = navigator, navTransition =  NavTransition(), initialRoute = "/tuner") {
         scene(route = "/tuner") {
-            tunerUI()
+            tunerView()
         }
         scene(route = "/tunings") {
-            tuningsUI()
+            tuningsView()
         }
         scene(route = "/settings") {
-            settingUI(generalViewModel)
+            settingView(generalViewModel)
         }
     }
 }

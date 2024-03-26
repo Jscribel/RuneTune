@@ -1,4 +1,4 @@
-package ui
+package views
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -15,7 +15,7 @@ import moe.tlaster.precompose.navigation.NavOptions
 import moe.tlaster.precompose.navigation.Navigator
 
 @Composable
-fun bottomBarUI(navigator : Navigator){
+fun bottomBarView(navigator : Navigator){
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly

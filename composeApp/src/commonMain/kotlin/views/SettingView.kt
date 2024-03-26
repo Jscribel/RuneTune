@@ -1,4 +1,4 @@
-package ui
+package views
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import viewModels.GeneralViewModel
 
 @Composable
-fun settingUI(generalViewModel: GeneralViewModel){
+fun settingView(generalViewModel: GeneralViewModel){
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,

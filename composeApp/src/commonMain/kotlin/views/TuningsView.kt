@@ -1,4 +1,4 @@
-package ui
+package views
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,13 +9,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun tunerUI() {
+fun tuningsView() {
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(text = "Tuning Sets Page")
+        Text(text = "Tuner Page")
         Text(text = "Pitch")
         Text(text = "0")
     }

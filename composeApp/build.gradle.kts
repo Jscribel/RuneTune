@@ -29,6 +29,8 @@ kotlin {
     }
     
     sourceSets {
+        val precomposeVersion = "1.5.11"
+
         val desktopMain by getting
         
         androidMain.dependencies {
@@ -42,6 +44,8 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation("moe.tlaster:precompose:$precomposeVersion")
+            implementation("moe.tlaster:precompose-viewmodel:$precomposeVersion")
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)

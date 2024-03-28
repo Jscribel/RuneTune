@@ -6,17 +6,15 @@ import moe.tlaster.precompose.PreComposeApp
 import moe.tlaster.precompose.navigation.rememberNavigator
 import moe.tlaster.precompose.viewmodel.viewModel
 import viewModels.GeneralViewModel
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import views.bottomBarView
 import views.navHostView
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 @Preview
-fun App() {
-    PreComposeApp(){
-        MaterialTheme {
+fun App(){
+    PreComposeApp{
+        MaterialTheme{
             val navigator = rememberNavigator()
             val generalViewModel = viewModel(modelClass = GeneralViewModel::class){
                 GeneralViewModel()

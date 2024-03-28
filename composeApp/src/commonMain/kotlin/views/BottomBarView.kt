@@ -6,19 +6,25 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import moe.tlaster.precompose.navigation.NavOptions
 import moe.tlaster.precompose.navigation.Navigator
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.vectorResource
+import runetune.composeapp.generated.resources.Res
+import runetune.composeapp.generated.resources.TunerIcon
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun bottomBarView(navigator : Navigator){
     Row(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceEvenly
+        horizontalArrangement = Arrangement.SpaceEvenly,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         IconButton(
             onClick = {
@@ -47,7 +53,7 @@ fun bottomBarView(navigator : Navigator){
             }
         ) {
             Icon(
-                imageVector = Icons.Default.Home,
+                imageVector = vectorResource(Res.drawable.TunerIcon),
                 contentDescription = "Tuner"
             )
         }

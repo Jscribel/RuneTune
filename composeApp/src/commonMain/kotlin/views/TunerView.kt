@@ -15,7 +15,7 @@ fun tunerView() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(text = "Tuning Sets Page")
+        Text(text = "Tuner Page")
         Text(text = "Pitch")
         Text(text = "0")
     }

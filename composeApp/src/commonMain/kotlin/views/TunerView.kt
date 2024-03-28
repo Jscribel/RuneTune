@@ -18,5 +18,6 @@ fun tunerView() {
         Text(text = "Tuner Page")
         Text(text = "Pitch")
         Text(text = "0")
+
     }
 }

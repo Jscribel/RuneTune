@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
+    alias(libs.plugins.sqlDelight)
 }
 
 kotlin {
@@ -29,13 +30,12 @@ kotlin {
     }
     
     sourceSets {
-        val precomposeVersion = "1.5.11"
-
         val desktopMain by getting
         
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.sqldelight.android)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -44,11 +44,23 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-            implementation("moe.tlaster:precompose:$precomposeVersion")
-            implementation("moe.tlaster:precompose-viewmodel:$precomposeVersion")
+            implementation(libs.precompose)
+            implementation(libs.precompose.viewmodel)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
+            implementation(libs.sqldelight.jvm)
+        }
+        iosMain.dependencies {
+            implementation(libs.sqldelight.native)
+        }
+    }
+
+    sqldelight{
+        databases{
+            create("Database"){
+                packageName = "com.jscribel"
+            }
         }
     }
 }

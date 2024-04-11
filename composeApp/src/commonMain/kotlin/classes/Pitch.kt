@@ -1,8 +1,8 @@
-package com.jscribel.runetune
+package classes
 
 import kotlin.math.pow
 
-data class Pitch(private val note : String, private val frequencyRelative : Double, private val octave : Int, private var offset : Double = 0.0){
+data class Pitch(private val note : String, private val frequencyRelative : Double, private val octave : Long, private var offset : Double = 0.0){
     fun getNote() : String{
         return note
     }
@@ -12,7 +12,7 @@ data class Pitch(private val note : String, private val frequencyRelative : Doub
     fun getFrequencyRelative() : Double{
         return frequencyRelative
     }
-    fun getOctave() : Int{
+    fun getOctave() : Long{
         return octave
     }
     fun getOffset() : Double{

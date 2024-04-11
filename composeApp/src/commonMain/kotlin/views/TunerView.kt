@@ -17,7 +17,7 @@ import kotlin.math.roundToInt
 @Composable
 fun tunerView(generalViewModel: GeneralViewModel) {
     val tunerViewModel = viewModel(modelClass = TunerViewModel::class){
-        TunerViewModel()
+        TunerViewModel(generalViewModel)
     }
     Column(
         modifier = Modifier.fillMaxWidth().fillMaxHeight(),
@@ -32,7 +32,7 @@ fun tunerView(generalViewModel: GeneralViewModel) {
             contentColor = generalViewModel.foregroundColor
         ){
             Text(
-                text = tunerViewModel.pitch.toString()
+                text = generalViewModel.displayPitch(tunerViewModel.pitch)
             )
         }
         Text(text = tunerViewModel.pitch.getOffset().roundToInt().toString())

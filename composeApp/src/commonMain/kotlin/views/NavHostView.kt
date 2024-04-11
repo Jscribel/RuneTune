@@ -7,13 +7,13 @@ import moe.tlaster.precompose.navigation.transition.NavTransition
 import viewModels.GeneralViewModel
 
 @Composable
-fun navHostView(navigator : Navigator, generalViewModel :GeneralViewModel){
+fun navHostView(navigator : Navigator, generalViewModel : GeneralViewModel){
     NavHost(navigator = navigator, navTransition =  NavTransition(), initialRoute = "/tuner") {
         scene(route = "/tuner") {
-            tunerView()
+            tunerView(generalViewModel)
         }
         scene(route = "/tunings") {
-            tuningsView()
+            tuningsView(generalViewModel)
         }
         scene(route = "/settings") {
             settingView(generalViewModel)

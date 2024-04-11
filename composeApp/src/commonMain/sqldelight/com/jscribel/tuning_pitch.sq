@@ -1,0 +1,48 @@
+CREATE TABLE tuning_pitch (
+	tuning_id INTEGER NOT NULL,
+	string INTEGER NOT NULL,
+	note TEXT NOT NULL,
+    octave INTEGER NOT NULL,
+    pitch_offset REAL NOT NULL
+);
+
+insert:
+INSERT OR REPLACE INTO tuning_pitch(tuning_id, string, note, octave, pitch_offset)
+VALUES(?,?, ?, ?, ?);
+
+getByTuningID:
+SELECT *
+FROM tuning_pitch
+WHERE tuning_id = :tuningID
+ORDER BY 2 ASC;
+
+getAll:
+SELECT * FROM tuning_pitch;
+
+updateNote:
+UPDATE tuning_pitch
+SET note = :note
+WHERE tuning_id = :id AND string = :string;
+
+updateOctave:
+UPDATE tuning_pitch
+SET octave = :octave
+WHERE tuning_id = :id AND string = :string;
+
+updateOffset:
+UPDATE tuning_pitch
+SET pitch_offset = :offset
+WHERE tuning_id = :id AND string = :string;
+
+updateAll:
+UPDATE tuning_pitch
+SET note = :note, octave = :octave, pitch_offset = :offset
+WHERE tuning_id = :id AND string = :string;
+
+delete:
+DELETE FROM tuning_pitch
+WHERE tuning_id IS :id AND string = :string;
+
+deleteTuning:
+DELETE FROM tuning_pitch
+WHERE tuning_id IS :id;

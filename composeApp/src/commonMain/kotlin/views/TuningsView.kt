@@ -14,18 +14,16 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.jscribel.runetune.Pitch
+import classes.Pitch
 import moe.tlaster.precompose.viewmodel.viewModel
 import viewModels.GeneralViewModel
 import viewModels.TuningsViewModel
 import kotlin.math.roundToInt
 
-val pitches : List<Pitch> = listOf(Pitch("E", 82.0, 2), Pitch("A", 110.0, 2), Pitch("D", 147.0, 3), Pitch("G", 196.0, 3), Pitch("B", 247.0, 3), Pitch("E", 330.0, 4))//test hardcode
-
 @Composable
 fun tuningsView(generalViewModel: GeneralViewModel) {
     val tuningsViewModel = viewModel(modelClass = TuningsViewModel::class){
-        TuningsViewModel()
+        TuningsViewModel(generalViewModel)
     }
 
     Column(
@@ -60,26 +58,25 @@ fun tuningsView(generalViewModel: GeneralViewModel) {
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceEvenly
         ){
-            items((pitches.size + 2)/3){indexColumn ->
+            items((tuningsViewModel.tuning.getPitches().size + 2)/3){ indexColumn ->
                 LazyColumn(
-                    //modifier = Modifier.fillMaxHeight(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.SpaceEvenly
                 ){
-                    var countButton : Int = pitches.size - (3 * indexColumn)
+                    var countButton : Int = tuningsViewModel.tuning.getPitches().size - (3 * indexColumn)
                     if(countButton > 3){
                         countButton = 3
                     }
                     items(countButton){indexButton ->
                         Button(
                             onClick = {
-                                tuningsViewModel.changePitch(pitches[(indexColumn * 3 + indexButton)])
+                                tuningsViewModel.changePitch(tuningsViewModel.tuning.getPitches()[(indexColumn * 3 + indexButton)])
                             },
                             shape = CircleShape,
                             colors = ButtonDefaults.buttonColors(backgroundColor = generalViewModel.highlightColor, contentColor = generalViewModel.foregroundColor)
                         ) {
                             Text(
-                                text = pitches[(indexColumn * 3 + indexButton)].toString()
+                                text = tuningsViewModel.tuning.getPitches()[(indexColumn * 3 + indexButton)].toString()
                             )
                         }
                     }

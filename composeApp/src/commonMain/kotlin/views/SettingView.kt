@@ -43,5 +43,28 @@ fun settingView(generalViewModel: GeneralViewModel){
                 Text(text = "light")
             }
         }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            Text("Alteration")
+            Button(
+                onClick = {
+                    generalViewModel.changeAlteration("flat")
+                },
+                colors = ButtonDefaults.buttonColors(backgroundColor = generalViewModel.highlightColor, contentColor = generalViewModel.foregroundColor)
+            ){
+                Text(text = "flat")
+            }
+            Button(
+                onClick = {
+                    generalViewModel.changeAlteration("sharp")
+                },
+                colors = ButtonDefaults.buttonColors(backgroundColor = generalViewModel.highlightColor, contentColor = generalViewModel.foregroundColor)
+            ){
+                Text(text = "sharp")
+            }
+        }
     }
 }

@@ -1,0 +1,21 @@
+CREATE TABLE setting (
+	field_name TEXT NOT NULL PRIMARY KEY,
+    field_value TEXT NOT NULL
+);
+
+INSERT INTO setting VALUES
+("theme", "dark"),
+("alteration", "flat");
+
+getValue:
+SELECT field_value
+FROM setting
+WHERE field_name = :name;
+
+getAll:
+SELECT * FROM setting;
+
+update:
+UPDATE setting
+SET field_value = :value
+WHERE field_name = :name;

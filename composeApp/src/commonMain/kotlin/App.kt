@@ -12,12 +12,13 @@ import views.navHostView
 
 @Composable
 @Preview
-fun App(){
+fun App(appModule: AppModule){
+
     PreComposeApp{
         MaterialTheme{
             val navigator = rememberNavigator()
             val generalViewModel = viewModel(modelClass = GeneralViewModel::class){
-                GeneralViewModel()
+                GeneralViewModel(appModule)
             }
             Scaffold(
                 backgroundColor = generalViewModel.backgroundColor,
@@ -29,7 +30,7 @@ fun App(){
                     BottomAppBar(
                         backgroundColor = generalViewModel.highlightColor,
                         contentColor = generalViewModel.foregroundColor
-                    ) {
+                    ){
                         bottomBarView(navigator)
                     }
                 }

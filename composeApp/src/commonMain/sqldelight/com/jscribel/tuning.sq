@@ -1,0 +1,30 @@
+CREATE TABLE tuning (
+	tuning_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    tuning_name TEXT NOT NULL
+);
+
+insert:
+INSERT OR REPLACE INTO tuning(tuning_name)
+VALUES(?);
+
+getByID:
+SELECT *
+FROM tuning
+WHERE tuning_id = :id;
+
+getByName:
+SELECT *
+FROM tuning
+WHERE tuning_name = :name;
+
+getAll:
+SELECT * FROM tuning;
+
+update:
+UPDATE tuning
+SET tuning_name = :name
+WHERE tuning_id = :id;
+
+delete:
+DELETE FROM tuning
+WHERE tuning_id IS :id;

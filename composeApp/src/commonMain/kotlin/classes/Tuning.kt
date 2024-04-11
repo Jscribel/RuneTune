@@ -1,10 +1,10 @@
-package com.jscribel.runetune
+package classes
 
 data class Tuning(private var name : String, private var pitches : MutableList<Pitch>) {
     fun getName() : String{
         return name
     }
-    fun getPitch(numberString : Int) : Pitch{
+    fun getPitch(numberString : Int) : Pitch {
         return pitches[numberString]
     }
     fun getPitches() : List<Pitch>{

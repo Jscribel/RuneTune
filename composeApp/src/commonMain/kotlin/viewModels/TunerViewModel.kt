@@ -12,7 +12,7 @@ class TunerViewModel(generalViewModel: GeneralViewModel) : ViewModel(){
     var pitch by mutableStateOf(pitchDataSource.getClosest(545.0))
         private set
 
-    fun changePitch(pitch : Pitch){
-        this.pitch = pitch
+    fun changePitch(frequency : Double){
+        pitch = pitchDataSource.getClosest(frequency)
     }
 }

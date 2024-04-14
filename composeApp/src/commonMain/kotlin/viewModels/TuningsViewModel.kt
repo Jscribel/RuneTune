@@ -14,15 +14,21 @@ class TuningsViewModel(generalViewModel: GeneralViewModel) : ViewModel(){
     var tuningsWidth by mutableStateOf(0)
         private set
 
-    var tuning by mutableStateOf(tuningDataSource.getTuning(1))
-    var pitch by mutableStateOf(Pitch("E", 82.0, 2))
+    var tuning by mutableStateOf(tuningDataSource.getTuning(0))
+        private set
+    var pitch by mutableStateOf(tuning.getPitch(0))
         private set
 
     fun changeTuningsWidth(width : Int){
         tuningsWidth = width
     }
 
-    fun changePitch(pitch : Pitch){
-        this.pitch = pitch
+    fun changeTuning(tuningID : Long){
+        tuning = tuningDataSource.getTuning(tuningID)
+        pitch = tuning.getPitch(0)
+    }
+
+    fun changeString(string : Int){
+        pitch = tuning.getPitch(string)
     }
 }

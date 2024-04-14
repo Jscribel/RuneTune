@@ -2,6 +2,7 @@ package views
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
@@ -31,7 +32,30 @@ fun tuningsView(generalViewModel: GeneralViewModel) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
-
+        //options bar
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.Top
+        ){
+            Text("Theme")
+            Button(
+                onClick = {
+                    tuningsViewModel.changeTuning(0)
+                },
+                colors = ButtonDefaults.buttonColors(backgroundColor = generalViewModel.highlightColor, contentColor = generalViewModel.foregroundColor)
+            ){
+                Text(text = "E-Standard")
+            }
+            Button(
+                onClick = {
+                    tuningsViewModel.changeTuning(1)
+                },
+                colors = ButtonDefaults.buttonColors(backgroundColor = generalViewModel.highlightColor, contentColor = generalViewModel.foregroundColor)
+            ){
+                Text(text = "Drop D")
+            }
+        }
         //display
         Column(
             modifier = Modifier.fillMaxWidth(),
@@ -46,37 +70,39 @@ fun tuningsView(generalViewModel: GeneralViewModel) {
                 contentColor = generalViewModel.foregroundColor
             ) {
                 Text(
-                    text = tuningsViewModel.pitch.toString()
+                    text = generalViewModel.displayPitch(tuningsViewModel.pitch)
                 )
             }
             Text(text = tuningsViewModel.pitch.getOffset().roundToInt().toString())
         }
 
         //Pitches
+        val sizeTuning = tuningsViewModel.tuning.getPitches().size
+        val numberButtons = if(sizeTuning > 10) 5 else sizeTuning/2
         LazyRow(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceEvenly
         ){
-            items((tuningsViewModel.tuning.getPitches().size + 2)/3){ indexColumn ->
+            items((sizeTuning + 2)/numberButtons){ indexColumn ->
                 LazyColumn(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.SpaceEvenly
                 ){
-                    var countButton : Int = tuningsViewModel.tuning.getPitches().size - (3 * indexColumn)
-                    if(countButton > 3){
-                        countButton = 3
+                    var countButton : Int = sizeTuning - (numberButtons * indexColumn)
+                    if(countButton > numberButtons){
+                        countButton = numberButtons
                     }
                     items(countButton){indexButton ->
                         Button(
                             onClick = {
-                                tuningsViewModel.changePitch(tuningsViewModel.tuning.getPitches()[(indexColumn * 3 + indexButton)])
+                                tuningsViewModel.changeString((indexColumn * numberButtons) + countButton - indexButton - 1)
                             },
                             shape = CircleShape,
                             colors = ButtonDefaults.buttonColors(backgroundColor = generalViewModel.highlightColor, contentColor = generalViewModel.foregroundColor)
                         ) {
                             Text(
-                                text = tuningsViewModel.tuning.getPitches()[(indexColumn * 3 + indexButton)].toString()
+                                text = generalViewModel.displayPitch(tuningsViewModel.tuning.getPitch((indexColumn * numberButtons) + countButton - indexButton - 1))
                             )
                         }
                     }

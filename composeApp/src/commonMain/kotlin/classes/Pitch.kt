@@ -2,7 +2,7 @@ package classes
 
 import kotlin.math.pow
 
-data class Pitch(private val note : String, private val frequencyRelative : Double, private val octave : Long, private var offset : Double = 0.0){
+data class Pitch(private val note : String, private val octave : Long, private val frequencyRelative : Double, private var offset : Double = 0.0){
     fun getNote() : String{
         return note
     }

@@ -1,24 +1,18 @@
 package classes
 
-data class Tuning(private var name : String, private var pitches : MutableList<Pitch>) {
+data class Tuning(private var name : String, private var pitches : MutableList<Pitch> = mutableListOf<Pitch>()) {
     fun getName() : String{
         return name
     }
     fun getPitch(numberString : Int) : Pitch {
-        return pitches[numberString]
+        return pitches[numberString + 1]
     }
-    fun getPitches() : List<Pitch>{
+    fun getPitches() : MutableList<Pitch>{
         return pitches
     }
 
     fun setName(name : String){
         this.name = name
-    }
-    fun setPitch(numberString : Int, pitch : Pitch){
-        pitches[numberString] = pitch
-    }
-    fun setPitches(pitches : MutableList<Pitch>){
-        this.pitches = pitches
     }
 
     override fun toString() : String{

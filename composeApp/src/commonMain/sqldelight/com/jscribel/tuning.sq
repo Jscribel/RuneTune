@@ -3,6 +3,12 @@ CREATE TABLE tuning (
     tuning_name TEXT NOT NULL
 );
 
+INSERT INTO tuning
+VALUES
+    (0, "E-Standard"),
+    (1, "Drop D");
+
+
 insert:
 INSERT OR REPLACE INTO tuning(tuning_name)
 VALUES(?);
@@ -23,8 +29,8 @@ SELECT * FROM tuning;
 update:
 UPDATE tuning
 SET tuning_name = :name
-WHERE tuning_id = :id;
+WHERE tuning_id = :id AND tuning_id != 0;
 
 delete:
 DELETE FROM tuning
-WHERE tuning_id IS :id;
+WHERE tuning_id IS :id AND tuning_id != 0;

@@ -36,6 +36,7 @@ kotlin {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.sqldelight.android)
+            implementation(fileTree("dir" to "libs", "include" to listOf("*.jar")))
         }
         commonMain.dependencies {
             implementation(compose.runtime)

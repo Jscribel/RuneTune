@@ -5,7 +5,7 @@ data class Tuning(private var name : String, private var pitches : MutableList<P
         return name
     }
     fun getPitch(numberString : Int) : Pitch {
-        return pitches[numberString + 1]
+        return pitches[numberString - 1]
     }
     fun getPitches() : MutableList<Pitch>{
         return pitches

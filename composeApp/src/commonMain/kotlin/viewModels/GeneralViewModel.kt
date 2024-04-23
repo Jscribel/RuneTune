@@ -8,6 +8,7 @@ import androidx.compose.ui.graphics.Color
 import classes.Pitch
 import moe.tlaster.precompose.viewmodel.ViewModel
 import classes.Theme
+import dataSources.PitchDataSource
 import dataSources.SettingDataSource
 
 
@@ -30,6 +31,8 @@ class GeneralViewModel(internal val appModule: AppModule) : ViewModel(){
     private var theme = toTheme(settingDataSource.get("theme"))
     private var alteration = toAlteration(settingDataSource.get("alteration"))
 
+    var pitch by mutableStateOf(Pitch("C", 0, 0.0, -2147483648.0))
+
     var backgroundColor by mutableStateOf(Color(theme.bgRed, theme.bgGreen, theme.bgBlue))
         private set
     var foregroundColor by mutableStateOf(Color(theme.fgRed, theme.fgGreen, theme.fgBlue))
@@ -47,6 +50,10 @@ class GeneralViewModel(internal val appModule: AppModule) : ViewModel(){
     fun changeAlteration(value : String){
         alteration = toAlteration(value)
         settingDataSource.update("alteration", value)
+    }
+
+    fun changePitch(pitch: Pitch){
+        this.pitch = pitch
     }
 
     fun displayPitch(pitch : Pitch) : String{

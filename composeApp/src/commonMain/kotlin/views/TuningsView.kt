@@ -19,6 +19,7 @@ import classes.Pitch
 import moe.tlaster.precompose.viewmodel.viewModel
 import viewModels.GeneralViewModel
 import viewModels.TuningsViewModel
+import kotlin.math.log2
 import kotlin.math.roundToInt
 
 @Composable
@@ -36,9 +37,9 @@ fun tuningsView(generalViewModel: GeneralViewModel) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly,
-            verticalAlignment = Alignment.Top
+            verticalAlignment = Alignment.CenterVertically
         ){
-            Text("Theme")
+            Text("Tuning")
             Button(
                 onClick = {
                     tuningsViewModel.changeTuning(0)
@@ -56,6 +57,7 @@ fun tuningsView(generalViewModel: GeneralViewModel) {
                 Text(text = "Drop D")
             }
         }
+
         //display
         Column(
             modifier = Modifier.fillMaxWidth(),
@@ -73,12 +75,13 @@ fun tuningsView(generalViewModel: GeneralViewModel) {
                     text = generalViewModel.displayPitch(tuningsViewModel.pitch)
                 )
             }
-            Text(text = tuningsViewModel.pitch.getOffset().roundToInt().toString())
+            Text(text = if(generalViewModel.pitch.getOffset() == -1.0) "" else (1200 * log2((generalViewModel.pitch.getFrequency())/(tuningsViewModel.pitch.getFrequency()))).roundToInt().toString())
         }
 
         //Pitches
         val sizeTuning = tuningsViewModel.tuning.getPitches().size
         val numberButtons = if(sizeTuning > 10) 5 else sizeTuning/2
+        var countButton : Int
         LazyRow(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
@@ -89,20 +92,20 @@ fun tuningsView(generalViewModel: GeneralViewModel) {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.SpaceEvenly
                 ){
-                    var countButton : Int = sizeTuning - (numberButtons * indexColumn)
+                    countButton = sizeTuning - (numberButtons * indexColumn)
                     if(countButton > numberButtons){
                         countButton = numberButtons
                     }
                     items(countButton){indexButton ->
                         Button(
                             onClick = {
-                                tuningsViewModel.changeString((indexColumn * numberButtons) + countButton - indexButton - 1)
+                                tuningsViewModel.changeString((indexColumn * numberButtons) + countButton - indexButton)
                             },
                             shape = CircleShape,
                             colors = ButtonDefaults.buttonColors(backgroundColor = generalViewModel.highlightColor, contentColor = generalViewModel.foregroundColor)
                         ) {
                             Text(
-                                text = generalViewModel.displayPitch(tuningsViewModel.tuning.getPitch((indexColumn * numberButtons) + countButton - indexButton - 1))
+                                text = generalViewModel.displayPitch(tuningsViewModel.tuning.getPitch((indexColumn * numberButtons) + countButton - indexButton))
                             )
                         }
                     }

@@ -1,6 +1,7 @@
 import androidx.compose.material.BottomAppBar
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import moe.tlaster.precompose.PreComposeApp
 import moe.tlaster.precompose.navigation.rememberNavigator
@@ -13,17 +14,18 @@ import views.navHostView
 @Composable
 @Preview
 fun App(appModule: AppModule){
-
     PreComposeApp{
         MaterialTheme{
             val navigator = rememberNavigator()
             val generalViewModel = viewModel(modelClass = GeneralViewModel::class){
                 GeneralViewModel(appModule)
             }
+            appModule.startPitchDetector(generalViewModel)
             Scaffold(
                 backgroundColor = generalViewModel.backgroundColor,
                 contentColor = generalViewModel.foregroundColor,
                 content = {
+                    Text(generalViewModel.displayPitch(generalViewModel.pitch) + " " + generalViewModel.pitch.getOffset())
                     navHostView(navigator, generalViewModel)
                 },
                 bottomBar = {

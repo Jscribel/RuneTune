@@ -16,7 +16,7 @@ class TuningsViewModel(generalViewModel: GeneralViewModel) : ViewModel(){
 
     var tuning by mutableStateOf(tuningDataSource.getTuning(0))
         private set
-    var pitch by mutableStateOf(tuning.getPitch(0))
+    var pitch by mutableStateOf(tuning.getPitch(1))
         private set
 
     fun changeTuningsWidth(width : Int){
@@ -25,7 +25,7 @@ class TuningsViewModel(generalViewModel: GeneralViewModel) : ViewModel(){
 
     fun changeTuning(tuningID : Long){
         tuning = tuningDataSource.getTuning(tuningID)
-        pitch = tuning.getPitch(0)
+        pitch = tuning.getPitch(1)
     }
 
     fun changeString(string : Int){

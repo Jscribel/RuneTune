@@ -35,10 +35,10 @@ fun tunerView(generalViewModel: GeneralViewModel) {
             contentColor = generalViewModel.foregroundColor
         ){
             Text(
-                text = generalViewModel.displayPitch(tunerViewModel.pitch)
+                text = generalViewModel.displayPitch(generalViewModel.pitch)
             )
         }
-        Text(text = tunerViewModel.pitch.getOffset().roundToInt().toString())
+        Text(text = generalViewModel.pitch.getOffset().roundToInt().toString())
 
     }
 }

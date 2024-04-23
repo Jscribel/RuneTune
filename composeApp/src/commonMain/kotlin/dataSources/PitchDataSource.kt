@@ -14,16 +14,21 @@ class PitchDataSource(private val database: Database){
 
     fun getClosest(frequency : Double) : Pitch {
         val pitch = queries.getByFrequency(frequency).executeAsOneOrNull()
-        if(pitch == null){
+        return if(frequency < 0){
+            Pitch("N", -1, -1.0, -1.0)
+        }
+        else if(pitch == null){
             val pitchHigh = queries.getNextByFrequency(frequency).executeAsOneOrNull()
             val pitchLow = queries.getPrevByFrequency(frequency).executeAsOneOrNull()
 
-            return if(pitchHigh == null || pitchLow != null && pitchHigh.frequency - frequency > frequency - pitchLow.frequency)
+            if(pitchHigh == null || pitchLow != null && pitchHigh.frequency - frequency > frequency - pitchLow.frequency){
                 Pitch(pitchLow!!.note, pitchLow.octave, pitchLow.frequency, 1200 * log2(frequency/pitchLow.frequency))//why is !! needed
-
-            else Pitch(pitchHigh.note, pitchHigh.octave, pitchHigh.frequency, 1200 * log2(frequency/pitchHigh.frequency))
+            }
+            else{
+                Pitch(pitchHigh.note, pitchHigh.octave, pitchHigh.frequency, 1200 * log2(frequency/pitchHigh.frequency))// if else block for frequency
+            }
         }
-        else return Pitch(pitch.note, pitch.octave, pitch.frequency)
+        else Pitch(pitch.note, pitch.octave, pitch.frequency)
     }
 
     fun getAll() : List<Pitch>{

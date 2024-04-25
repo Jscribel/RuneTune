@@ -126,19 +126,23 @@ SELECT *
 FROM pitch
 WHERE frequency = :frequency;
 
-getNextByFrequency:
-SELECT *
-FROM pitch
-WHERE frequency > :frequency
-ORDER BY 3 ASC
+getClosest:
+SELECT * FROM pitch
+ORDER BY ABS(:frequency - frequency)
 LIMIT 1;
-
-getPrevByFrequency:
-SELECT *
-FROM pitch
-WHERE frequency < :frequency
-ORDER BY 3 DESC
-LIMIT 1;
+-- getNextByFrequency:
+-- SELECT *
+-- FROM pitch
+-- WHERE frequency > :frequency
+-- ORDER BY 3 ASC
+-- LIMIT 1;
+--
+-- getPrevByFrequency:
+-- SELECT *
+-- FROM pitch
+-- WHERE frequency < :frequency
+-- ORDER BY 3 DESC
+-- LIMIT 1;
 
 getAll:
 SELECT * FROM pitch;

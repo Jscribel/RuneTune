@@ -31,7 +31,9 @@ class GeneralViewModel(internal val appModule: AppModule) : ViewModel(){
     private var theme = toTheme(settingDataSource.get("theme"))
     private var alteration = toAlteration(settingDataSource.get("alteration"))
 
-    var pitch by mutableStateOf(Pitch("C", 0, 0.0, -2147483648.0))
+    var debugMessage by mutableStateOf("")
+
+    var pitch by mutableStateOf(Pitch("Auto", 0, 0.0, 0.0))
 
     var backgroundColor by mutableStateOf(Color(theme.bgRed, theme.bgGreen, theme.bgBlue))
         private set
@@ -57,8 +59,9 @@ class GeneralViewModel(internal val appModule: AppModule) : ViewModel(){
     }
 
     fun displayPitch(pitch : Pitch) : String{
-        return if (pitch.getNote().length > 1)
+        return if (pitch.getNote().length == 5)
             pitch.getNote().slice((alteration * 3)..(1 + alteration * 3)) + " " + pitch.getOctave()
+        else if (pitch.getNote().length == 4) pitch.getNote()
         else pitch.getNote() + " " + pitch.getOctave()
     }
 }

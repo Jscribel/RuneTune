@@ -25,7 +25,7 @@ fun App(appModule: AppModule){
                 backgroundColor = generalViewModel.backgroundColor,
                 contentColor = generalViewModel.foregroundColor,
                 content = {
-                    Text(generalViewModel.displayPitch(generalViewModel.pitch) + " " + generalViewModel.pitch.getOffset())
+                    Text(generalViewModel.debugMessage)
                     navHostView(navigator, generalViewModel)
                 },
                 bottomBar = {

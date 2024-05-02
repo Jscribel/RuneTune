@@ -14,7 +14,7 @@ class PitchDataSource(private val database: Database){
 
     fun getClosest(frequency : Double) : Pitch {
         return if(frequency < 0){
-            Pitch("N", -1, -1.0, -1.0)
+            Pitch("Auto", -1, -1.0, -1.0)
         }
         else{
             val pitch = queries.getClosest(frequency).executeAsOne()

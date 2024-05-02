@@ -1,6 +1,5 @@
 package views
 
-import FrequencyRecorder
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -20,7 +19,6 @@ fun tunerView(generalViewModel: GeneralViewModel) {
     val tunerViewModel = viewModel(modelClass = TunerViewModel::class){
         TunerViewModel(generalViewModel)
     }
-    val frequencyRecorder = FrequencyRecorder()
 
     Column(
         modifier = Modifier.fillMaxWidth().fillMaxHeight(),
